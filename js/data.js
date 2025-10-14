@@ -1,5 +1,3 @@
-import { getRandomInt, getRandomItem } from './util.js';
-
 const DESCRIPTIONS = ['Отличный кадр!', 'Прекрасный вид!', 'Незабываемый момент!', 'Как вам такое?', 'Это просто космос!'];
 const NAMES = ['Артём', 'Мария', 'Алексей', 'Елена', 'Дмитрий', 'Ольга', 'Иван', 'Анна'];
 const MESSAGES = [
@@ -11,17 +9,4 @@ const MESSAGES = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такого рода момент?!'
 ];
 
-const createComment = () => ({
-  id: getRandomInt(100, 9999),
-  avatar: `img/avatar-${getRandomInt(1, 6)}.svg`,
-  message: Array.from({length: getRandomInt(1, 2)}, () => getRandomItem(MESSAGES)).join(' '),
-  name: getRandomItem(NAMES)
-});
-
-export const createPhotos = () => Array.from({length: 25}, (_, i) => ({
-  id: i + 1,
-  url: `photos/${i + 1}.jpg`,
-  description: getRandomItem(DESCRIPTIONS),
-  likes: getRandomInt(15, 200),
-  comments: Array.from({length: getRandomInt(0, 30)}, createComment)
-}));
+export {DESCRIPTIONS, NAMES, MESSAGES};
