@@ -34,4 +34,5 @@ const renderThumbnails = (picturesList, picturesContainer) => {
   picturesContainer.appendChild(renderFragment);
 };
 
+
 export { renderThumbnails };

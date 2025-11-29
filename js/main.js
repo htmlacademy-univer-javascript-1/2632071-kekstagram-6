@@ -8,4 +8,4 @@ renderThumbnails(userPhotos, picturesContainer);
 
 initFullscreenView();
 
-export {userPhotos};
+export { userPhotos };
