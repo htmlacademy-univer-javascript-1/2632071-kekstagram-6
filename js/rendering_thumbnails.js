@@ -4,33 +4,18 @@ const createThumbnail = (pictureData) => {
   const thumbnailElement = pictureTemplate.content.querySelector('.picture').cloneNode(true);
   thumbnailElement.dataset.id = pictureData.id;
 
-  // Действия над картинками
+  //Действия над картинками
   const thumbImg = thumbnailElement.querySelector('.picture__img');
   thumbImg.src = pictureData.url;
   thumbImg.alt = pictureData.description;
 
-  // Действия над комментариями
+  //Действия над комментариями
   const thumbComments = thumbnailElement.querySelector('.picture__comments');
   thumbComments.textContent = pictureData.comments.length;
 
-  // ФИКС ВЫРАВНИВАНИЯ (chatgpt)
-  thumbComments.style.display = 'inline-flex';
-  thumbComments.style.alignItems = 'center';
-  thumbComments.style.lineHeight = '1';
-  thumbComments.style.position = 'relative';
-  thumbComments.style.top = '0';
-
-  // Действия над лайками
+  //Действия над лайками
   const thumbLikes = thumbnailElement.querySelector('.picture__likes');
   thumbLikes.textContent = pictureData.likes;
-
-  // ФИКС ВЫРАВНИВАНИЯ (chatgpt)
-  thumbLikes.style.display = 'inline-flex';
-  thumbLikes.style.alignItems = 'center';
-  thumbLikes.style.lineHeight = '1';
-  thumbLikes.style.position = 'relative';
-  thumbLikes.style.top = '0';
-
   return thumbnailElement;
 };
 
