@@ -441,3 +441,6 @@ function initUploadForm() {
 }
 
 export { initUploadForm, closeUploadForm };
+
+
+// Задание выполнено в ветке 12.1, при проверке базовых критериев
