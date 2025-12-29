@@ -1,7 +1,7 @@
 import { getRandomInteger, getRandomArrayElement } from './util.js';
 import { names, messages, descriptions } from './data.js';
 
-// Создание случайного сообщения
+/* Создание случайного сообщения */
 function generateMessage() {
   const messageCount = getRandomInteger(1, 2);
   const generatedMessages = [];
@@ -12,7 +12,7 @@ function generateMessage() {
   return generatedMessages.join(' ');
 }
 
-// Функция для создания уникальных ID (для комментариев)
+/* Функция создания уникальных ID (для комментариев) */
 function createId() {
   const usedIds = new Set();
   return function generateNewId() {
@@ -27,7 +27,7 @@ function createId() {
 
 const generateCommentId = createId();
 
-// Функция для создания комментария
+/* Функция создания комментария */
 function createComment() {
   const comment = {
     id: generateCommentId(),
@@ -38,7 +38,7 @@ function createComment() {
   return comment;
 }
 
-// Функция для создания одной фотографии
+/* Функция создания одной фотографии */
 function createPhoto(photoId) {
   const commentCount = getRandomInteger(0, 30);
   const comments = [];
@@ -56,7 +56,7 @@ function createPhoto(photoId) {
   return photo;
 }
 
-// Функция для создания всех фотографий
+/* Функция создания всех фотографий */
 function generatePhotos() {
   const photos = [];
   const photoCount = 25;
