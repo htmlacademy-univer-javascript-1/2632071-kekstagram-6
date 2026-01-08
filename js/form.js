@@ -8,19 +8,19 @@ const hashtagsInput = uploadForm.querySelector('.text__hashtags');
 const descriptionInput = uploadForm.querySelector('.text__description');
 const submitButton = uploadForm.querySelector('.img-upload__submit');
 
-// Элементы для масштабирования
+/* Элементы для масштабирования */
 const scaleSmaller = uploadOverlay.querySelector('.scale__control--smaller');
 const scaleBigger = uploadOverlay.querySelector('.scale__control--bigger');
 const scaleValue = uploadOverlay.querySelector('.scale__control--value');
 const previewImage = uploadOverlay.querySelector('.img-upload__preview img');
 
-// Элементы для эффектов
+/* Элементы для эффектов */
 const effectsList = uploadOverlay.querySelector('.effects__list');
 const effectLevelContainer = uploadOverlay.querySelector('.img-upload__effect-level');
 const effectLevelValue = uploadOverlay.querySelector('.effect-level__value');
 const effectLevelSlider = uploadOverlay.querySelector('.effect-level__slider');
 
-// Инициализация Pristine
+/* Инициализация Pristine */
 let pristine = null;
 if (typeof Pristine !== 'undefined') {
   pristine = new Pristine(uploadForm, {
@@ -30,7 +30,7 @@ if (typeof Pristine !== 'undefined') {
   });
 }
 
-// Настройки эффектов
+/* Настройки эффектов */
 const effects = {
   none: {
     min: 0,
@@ -79,7 +79,7 @@ const effects = {
 let currentEffect = 'none';
 let slider = null;
 
-// Масштабирование
+/* Масштабирование */
 const SCALE_STEP = 25;
 const SCALE_MIN = 25;
 const SCALE_MAX = 100;
@@ -117,7 +117,7 @@ function applyEffect(value) {
   previewImage.style.filter = `${effect.filter}(${value}${effect.unit})`;
 }
 
-// Инициализация слайдера
+/* Инициализация слайдера */
 function initSlider() {
   if (typeof noUiSlider !== 'undefined') {
     slider = noUiSlider.create(effectLevelSlider, {
@@ -171,7 +171,7 @@ function onEffectChange(evt) {
   }
 }
 
-// Парсер хэш-тегов
+/* Парсер хэш-тегов */
 function parseTagsInput(input) {
   if (!input) {
     return [];
@@ -182,7 +182,7 @@ function parseTagsInput(input) {
     .filter(Boolean);
 }
 
-// Проверка формата одного тега
+/* Проверка формата одного тега на соблюдение условий */
 function isValidTagFormat(tag) {
   if (tag[0] !== '#') {
     return false;
@@ -196,7 +196,7 @@ function isValidTagFormat(tag) {
   return /^[A-Za-zА-Яа-яЁё0-9]+$/.test(tag.slice(1));
 }
 
-// Валидация хэш-тегов
+/* Валидация хэш-тегов */
 function validateHashtags(value) {
   const tags = parseTagsInput(value);
 
@@ -226,12 +226,12 @@ function validateHashtags(value) {
   return true;
 }
 
-// Сообщение об ошибке для хэш-тегов
+/* Сообщение об ошибке хэш-тегов */
 function hashtagsErrorMessage() {
   return validateHashtags.lastError || 'Неправильный формат хэш-тегов.';
 }
 
-// Валидация комментария
+/* Валидация комментария */
 function validateDescription(value) {
   if (value.length <= 140) {
     return true;
@@ -239,7 +239,7 @@ function validateDescription(value) {
   return false;
 }
 
-// Обработчик клавиши Esc для формы
+/* Обработчик клавиши ESCape для формы */
 function onDocumentKeydown(evt) {
   if (evt.key === 'Escape') {
     if (uploadOverlay.classList.contains('hidden')) {
@@ -255,7 +255,7 @@ function onDocumentKeydown(evt) {
   }
 }
 
-// Сброс формы к исходному состоянию
+/* Сброс формы к исходному состоянию */
 function resetFormToInitialState() {
   currentScale = 100;
   updateScale();
@@ -283,7 +283,7 @@ function resetFormToInitialState() {
   submitButton.disabled = false;
 }
 
-// Обработчики клавиш для сообщений
+/* Обработчики клавиш для закрытия сообщений */
 function onEscapeKeydown(evt) {
   if (evt.key === 'Escape') {
     closeMessage();
@@ -296,7 +296,7 @@ function onClickOutside(evt) {
   }
 }
 
-// Функции для показа/скрытия сообщений
+/* Функции для показа/скрытия сообщений */
 function showMessage(templateId, closeCallback) {
   const template = document.querySelector(`#${templateId}`);
   if (!template) {
@@ -343,17 +343,17 @@ function showErrorMessage() {
   submitButton.disabled = false;
 }
 
-// Функции для открытия/закрытия формы
+/* Функции для открытия/закрытия формы */
 function openUploadForm() {
   uploadOverlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
 
-  // Сброс масштаба
+  /* Сброс масштаба */
   currentScale = 100;
   updateScale();
 
-  // Сброс эффектов
+  /* Сброс эффектов */
   currentEffect = 'none';
   const noneEffectRadio = uploadOverlay.querySelector('#effect-none');
   if (noneEffectRadio) {
@@ -363,7 +363,7 @@ function openUploadForm() {
   effectLevelContainer.classList.add('hidden');
   previewImage.style.filter = 'none';
 
-  // Инициализация слайдера
+  /* Инициализация слайдера */
   if (!slider) {
     initSlider();
   } else {
@@ -389,7 +389,7 @@ function initUploadForm() {
 
   effectsList.addEventListener('change', onEffectChange);
 
-  // Загрузка файла
+  /* Загрузка файла */
   uploadInput.addEventListener('change', () => {
     if (uploadInput.files && uploadInput.files.length > 0) {
       const file = uploadInput.files[0];
@@ -404,13 +404,13 @@ function initUploadForm() {
     }
   });
 
-  // Кнопка отмены
+  /* Кнопка отмены */
   uploadCancel.addEventListener('click', (evt) => {
     evt.preventDefault();
     closeUploadForm();
   });
 
-  // Предотвращение закрытия формы при фокусе на полях ввода
+  /* Предотвращение закрытия формы при фокусе на полях ввода */
   [hashtagsInput, descriptionInput].forEach((el) => {
     el.addEventListener('keydown', (evt) => {
       if (evt.key === 'Escape') {
@@ -419,7 +419,7 @@ function initUploadForm() {
     });
   });
 
-  // Отправка формы
+  /* Отправка формы */
   uploadForm.addEventListener('submit', async (evt) => {
     evt.preventDefault();
 
@@ -442,5 +442,3 @@ function initUploadForm() {
 
 export { initUploadForm, closeUploadForm };
 
-
-// Задание выполнено в ветке 12.1, при проверке базовых критериев

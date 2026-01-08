@@ -1,13 +1,15 @@
+/*
 // Функция проверки длины строки
 const checkStringLength = (string, maxLength) => string.length <= maxLength;
-
+*/
+/*
 // Функция проверки палиндрома с учётом пробелов и регистра
 const isPalindrome = (string) => {
   const normalizedString = string.replaceAll(' ', '').toLowerCase();
   const reversedString = normalizedString.split('').reverse().join('');
   return normalizedString === reversedString;
 };
-
+*/
 /*
 // Проверка длины строки
 console.log(checkStringLength('проверяемая строка', 20)); //  дожлно быть true
@@ -44,3 +46,4 @@ console.log(isMeetingWithinWorkday('08:00', '14:30', '14:00', 90)); // false
 console.log(isMeetingWithinWorkday('14:00', '17:30', '08:0', 90));  // false
 console.log(isMeetingWithinWorkday('8:00', '17:30', '08:00', 900)); // false
 */
+
