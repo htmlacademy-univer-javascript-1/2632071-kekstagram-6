@@ -144,3 +144,4 @@ const initFullscreenView = () => {
 };
 
 export { initFullscreenView };
+

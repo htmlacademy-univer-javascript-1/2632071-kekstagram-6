@@ -4,17 +4,17 @@ import { initFullscreenView } from './fullscreen.js';
 import { initUploadForm } from './form.js';
 import { initFilters } from './filters.js';
 
-/* время показа ошибки */
+/* Время показа ошибки */
 const ALERT_SHOW_TIME = 5000;
 
-/* загруженные фото пользователя */
+/* Загруженные фото пользователя */
 let userPhotos = [];
 
-/* показывает сообщение об ошибке */
+/* Показывает сообщение об ошибке */
 const showAlert = (message) => {
   const alertContainer = document.createElement('div');
 
-  /* стили алерта */
+  /* Стили алерта */
   alertContainer.style.zIndex = '100';
   alertContainer.style.position = 'fixed';
   alertContainer.style.left = '0';
@@ -29,33 +29,33 @@ const showAlert = (message) => {
   alertContainer.textContent = message;
   document.body.append(alertContainer);
 
-  /* удаляем алерт через время */
+  /* Удаляем алерт через время */
   setTimeout(() => {
     alertContainer.remove();
   }, ALERT_SHOW_TIME);
 };
 
-/* загружает фото с сервера */
+/* Загружает фото с сервера */
 const loadPhotos = async () => {
   try {
-    /* получаем данные */
+    /* Получаем данные */
     userPhotos = await getData();
 
-    /* рендер превью */
+    /* Рендер превью */
     const picturesContainer = document.querySelector('.pictures');
     renderThumbnails(userPhotos, picturesContainer);
 
-    /* инициализация модалок и фильтров */
+    /* Инициализация модалок и фильтров */
     initFullscreenView();
     initFilters(userPhotos);
   } catch (error) {
-    /* показываем ошибку */
+    /* Показываем ошибку */
     showAlert(error.message);
     userPhotos = [];
   }
 };
 
-/* старт приложения */
+/* Старт приложения */
 window.addEventListener('DOMContentLoaded', () => {
   loadPhotos();
   initUploadForm();

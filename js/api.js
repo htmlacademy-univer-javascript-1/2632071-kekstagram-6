@@ -40,7 +40,6 @@ const load = async (routePath, errorMessage, methodType = method.GET, body = nul
 
 /* Получить данные с сервера */
 const getData = () => load(route.GET_DATA, errorText.GET_DATA);
-
 /* Отправить данные на сервер */
 const sendData = (body) => load(route.SEND_DATA, errorText.SEND_DATA, method.POST, body);
 

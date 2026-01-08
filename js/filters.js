@@ -1,25 +1,25 @@
 import { debounce } from './util.js';
 import { renderThumbnails } from './rendering_thumbnails.js';
 
-/* количество случайных фото */
+/* Количество случайных фото */
 const RANDOM_PHOTOS_COUNT = 10;
 
-/* текущий фильтр */
+/* Текущий фильтр */
 let currentFilter = 'default';
-/* все фото */
+/* Все фото */
 let originalPhotos = [];
-/* отфильтрованные фото */
+/* Отфильтрованные фото */
 let filteredPhotos = [];
 
-/* фильтр по умолчанию */
+/* Фильтр по умолчанию */
 const filterDefault = () => [...originalPhotos];
 
-/* фильтр случайных фото */
+/* Фильтр случайных фото */
 const filterRandom = () => {
   const photos = [...originalPhotos];
   const randomPhotos = [];
 
-  /* выбираем случайные без повторений */
+  /* Выбираем случайные без повторений */
   for (let i = 0; i < Math.min(RANDOM_PHOTOS_COUNT, photos.length); i++) {
     const randomIndex = Math.floor(Math.random() * photos.length);
     randomPhotos.push(photos[randomIndex]);
@@ -29,10 +29,10 @@ const filterRandom = () => {
   return randomPhotos;
 };
 
-/* фильтр по количеству комментариев */
+/* Фильтр по количеству комментариев */
 const filterDiscussed = () => [...originalPhotos].sort((a, b) => b.comments.length - a.comments.length);
 
-/* применяет текущий фильтр */
+/* Применяет текущий фильтр */
 const applyFilter = () => {
   switch (currentFilter) {
     case 'default':
@@ -48,7 +48,7 @@ const applyFilter = () => {
       filteredPhotos = filterDefault();
   }
 
-  /* контейнер для превью */
+  /* Контейнер для превью */
   const picturesContainer = document.querySelector('.pictures');
   renderThumbnails(filteredPhotos, picturesContainer);
 };
@@ -56,41 +56,41 @@ const applyFilter = () => {
 /* debounce для переключения фильтров */
 const debouncedApplyFilter = debounce(applyFilter);
 
-/* инициализация фильтров */
+/* Инициализация фильтров */
 const initFilters = (photos) => {
-  /* сохраняем исходные фото */
+  /* Сохраняем исходные фото */
   originalPhotos = [...photos];
 
-  /* показываем блок фильтров */
+  /* Показываем блок фильтров */
   const filtersElement = document.querySelector('.img-filters');
   filtersElement.classList.remove('img-filters--inactive');
 
-  /* кнопки фильтров */
+  /* Кнопки фильтров */
   const filterButtons = document.querySelectorAll('.img-filters__button');
 
-  /* обработчик клика */
+  /* Обработчик клика */
   const onFilterButtonClick = (evt) => {
-    /* убираем активный класс */
+    /* Убираем активный класс */
     filterButtons.forEach((button) => {
       button.classList.remove('img-filters__button--active');
     });
 
-    /* добавляем активный класс */
+    /* Добавляем активный класс */
     evt.target.classList.add('img-filters__button--active');
 
-    /* меняем текущий фильтр */
+    /* Меняем текущий фильтр */
     currentFilter = evt.target.id.replace('filter-', '');
 
-    /* применяем фильтр */
+    /* Применяем фильтр */
     debouncedApplyFilter();
   };
 
-  /* вешаем обработчики */
+  /* Вешаем обработчики */
   filterButtons.forEach((button) => {
     button.addEventListener('click', onFilterButtonClick);
   });
 
-  /* первый рендер */
+  /* Первый рендер */
   applyFilter();
 };
 

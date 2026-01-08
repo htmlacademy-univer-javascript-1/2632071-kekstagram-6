@@ -26,7 +26,6 @@ function createId() {
 }
 
 const generateCommentId = createId();
-
 /* Функция создания комментария */
 function createComment() {
   const comment = {
